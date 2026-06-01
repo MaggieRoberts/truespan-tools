@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueSpan Group — Producer Intake Checklist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #1a3a5c;
+    --teal: #0e7c7b;
+    --gold: #c9a84c;
+    --light: #f4f6f9;
+    --border: #d0d8e4;
+    --text: #2c3e50;
+    --muted: #6b7c93;
+    --white: #ffffff;
+    --red: #c0392b;
+    --green: #27ae60;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    body { background: white; }
+    .screen-only { display: none; }
+    .page { box-shadow: none; margin: 0; border-radius: 0; }
+    .tab-bar { display: none; }
+    .panel { display: block !important; }
+    .page-break { page-break-before: always; }
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: white;
+    padding: 28px 36px 24px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+
+  .header-left p {
+    font-size: 12px;
+    opacity: 0.65;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 11px;
+    opacity: 0.6;
+    line-height: 1.8;
+  }
+
+  .gold-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #e8c76a, var(--gold));
+  }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    display: flex;
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0 36px;
+  }
+
+  .tab {
+    padding: 12px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .tab:hover { color: rgba(255,255,255,0.8); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── PAGE CARD ── */
+  .page {
+    background: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 24px rgba(26,58,92,0.10);
+    overflow: hidden;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── PRE-CALL BANNER ── */
+  .precall {
+    background: linear-gradient(135deg, #0e7c7b 0%, #0a5f5f 100%);
+    color: white;
+    padding: 16px 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .precall-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .precall strong { font-weight: 600; }
+
+  .precall-items {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .precall-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  .precall-item::before {
+    content: '□';
+    font-size: 14px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px 12px;
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    width: 22px;
+    height: 22px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--navy);
+  }
+
+  .section-note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+    font-style: italic;
+  }
+
+  /* ── FIELDS ── */
+  .fields {
+    padding: 16px 36px;
+    display: grid;
+    gap: 0;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px 24px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .field-row:last-child { border-bottom: none; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .field label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+  }
+
+  .field .req {
+    color: var(--red);
+    margin-left: 2px;
+  }
+
+  .field-hint {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── INPUT FIELDS ── */
+  .field-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 4px 2px 3px;
+    outline: none;
+    transition: border-color 0.15s;
+    margin-top: 4px;
+  }
+
+  .field-input:focus {
+    border-bottom-color: var(--navy);
+    background: #f0f4ff;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .field-input::placeholder {
+    color: var(--border);
+    font-size: 11px;
+  }
+
+  .tbl-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    padding: 6px 2px 3px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .tbl-input:focus {
+    border-bottom-color: var(--navy);
+    background: #f0f4ff;
+  }
+
+  .note-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 16px 2px 3px;
+    outline: none;
+    transition: border-color 0.15s;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .note-input:focus {
+    border-bottom-color: var(--teal);
+    background: #f0faff;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* Print — keep inputs looking clean */
+  @media print {
+    .field-input, .tbl-input, .note-input {
+      border-bottom: 1px solid #999;
+      background: transparent !important;
+    }
+  }
+
+  /* ── CHECKBOX GROUPS ── */
+  .check-group {
+    padding: 12px 36px 14px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .check-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .check-label .req { color: var(--red); }
+
+  .checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .check-item input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--navy);
+    cursor: pointer;
+  }
+
+  /* ── YES/NO ROWS ── */
+  .yn-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 36px;
+    border-bottom: 1px dashed var(--border);
+    gap: 16px;
+  }
+
+  .yn-question {
+    font-size: 12px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .yn-options {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .yn-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .yn-option input[type="radio"] {
+    accent-color: var(--navy);
+  }
+
+  /* ── NOTES AREA ── */
+  .notes-area {
+    padding: 14px 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .notes-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ── FLAG BOXES ── */
+  .flag {
+    margin: 12px 36px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .flag.warn {
+    background: #fff8e6;
+    border-left: 3px solid var(--gold);
+    color: #7a5c00;
+  }
+
+  .flag.info {
+    background: #e8f4fd;
+    border-left: 3px solid #3498db;
+    color: #1a4a6b;
+  }
+
+  .flag-icon { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── POST-CALL SECTION ── */
+  .postcall {
+    background: linear-gradient(135deg, #1a3a5c 0%, #0f2540 100%);
+    color: white;
+    padding: 16px 36px;
+    margin: 0;
+  }
+
+  .postcall h3 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+
+  .postcall-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+  }
+
+  .postcall-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    opacity: 0.85;
+  }
+
+  .postcall-item input[type="checkbox"] {
+    accent-color: var(--gold);
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 12px 36px;
+    background: var(--light);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .print-btn {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    screen-only: true;
+  }
+
+  .print-btn:hover { background: var(--teal); }
+
+  /* ── VEHICLE REPEAT BLOCK ── */
+  .repeat-block {
+    padding: 12px 36px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .repeat-header {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .repeat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 20px;
+    margin-bottom: 8px;
+  }
+
+  .repeat-field label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ── PAYROLL TABLE ── */
+  .payroll-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin: 0 0 4px;
+  }
+
+  .payroll-table th {
+    background: var(--navy);
+    color: white;
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .payroll-table td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: bottom;
+  }
+
+  .payroll-table tr:nth-child(even) td { background: var(--light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .header { padding: 20px; flex-direction: column; align-items: flex-start; }
+    .tab-bar { padding: 0 16px; overflow-x: auto; }
+    .fields, .check-group, .yn-row, .notes-area, .repeat-block,
+    .section-header, .precall, .postcall, .footer { padding-left: 20px; padding-right: 20px; }
+    .repeat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>TrueSpan Group LLC</h1>
+    <p>Producer Intake Checklist &nbsp;·&nbsp; Agency Standard</p>
+  </div>
+  <div class="header-meta">
+    210 SW Market St Suite 145<br>
+    Lee's Summit, MO 64063<br>
+    (913) 242-0373
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<!-- TAB BAR -->
+<div class="tab-bar screen-only">
+  <div class="tab active" onclick="switchTab('personal')">Personal Lines</div>
+  <div class="tab" onclick="switchTab('commercial')">Commercial Lines</div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PERSONAL LINES PANEL -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="panel active" id="panel-personal">
+
+  <!-- PRE-CALL -->
+  <div class="precall">
+    <div class="precall-icon">📋</div>
+    <div>
+      <strong>Pre-Call Checklist</strong> — Complete before every prospect conversation
+      <div class="precall-items">
+        <div class="precall-item">Looked up prospect online</div>
+        <div class="precall-item">Intake form open and ready</div>
+        <div class="precall-item">AgencyZoom lead created</div>
+        <div class="precall-item">PL Rater tab open</div>
+        <div class="precall-item">Know lines they need</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: CONTACT INFO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div class="section-title">Contact Information</div>
+      <div class="section-note">Required for all personal lines</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Full Legal Name <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Home Address <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>How Did They Hear About Us?</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: LINES NEEDED -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div class="section-title">Lines of Coverage Needed</div>
+    </div>
+    <div class="check-group">
+      <div class="checks">
+        <label class="check-item"><input type="checkbox"> Auto</label>
+        <label class="check-item"><input type="checkbox"> Homeowners</label>
+        <label class="check-item"><input type="checkbox"> Renters</label>
+        <label class="check-item"><input type="checkbox"> Umbrella</label>
+        <label class="check-item"><input type="checkbox"> Landlord / Dwelling Fire</label>
+        <label class="check-item"><input type="checkbox"> Boat</label>
+        <label class="check-item"><input type="checkbox"> RV / Motorhome</label>
+        <label class="check-item"><input type="checkbox"> Motorcycle</label>
+        <label class="check-item"><input type="checkbox"> Life Insurance</label>
+        <label class="check-item"><input type="checkbox"> Other: _______________</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CURRENT COVERAGE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div class="section-title">Current Coverage</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Current Carrier(s) <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Policy Expiration Date <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Current Annual Premium</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any claims or losses in the past 3 years? <span class="req">*</span></span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-claims"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-claims"> No</label>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>If yes — date, type, and amount</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: AUTO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div class="section-title">Auto — Vehicles & Drivers</div>
+    </div>
+
+    <!-- VEHICLES -->
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 1</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 2 (if applicable)</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 3 (if applicable)</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+
+    <!-- DRIVERS -->
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 1 <span style="font-weight:400;color:var(--red);font-size:10px;margin-left:6px;">All fields required</span></div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License # <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State <span class="req">*</span></label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 2 (if applicable)</div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License #</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 3 (if applicable)</div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License #</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+
+    <div class="yn-row">
+      <span class="yn-question">Any accidents or violations in the past 5 years?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-violations"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-violations"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any drivers under age 25 in the household?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-young"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-young"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any vehicles used for business purposes?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-biz-use"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-biz-use"> No</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: HOME -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <div class="section-title">Homeowners / Renters / Dwelling</div>
+      <div class="section-note">Complete if applicable</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Property Address (if different)</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Year Built</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Sq Footage</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Ownership Status</label>
+          <input type="text" class="field-input">
+          <div class="field-hint">Own / Rent / Other</div>
+        </div>
+        <div class="field">
+          <label>Mortgage Company</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Roof Age / Last Updated</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any dogs on the property?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-dogs"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-dogs"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Pool, trampoline, or other attractive nuisance?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-pool"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-pool"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any home-based business operations?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="pl-homebiz"> Yes</label>
+        <label class="yn-option"><input type="radio" name="pl-homebiz"> No</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: NOTES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <div class="section-title">Notes & Follow-Up</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Best Time to Follow Up</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Preferred Contact Method</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Lead Source (for AgencyZoom)</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="notes-area">
+      <div class="notes-label">Additional Notes</div>
+      <div class="notes-lines">
+        <input type="text" class="note-input">
+        <input type="text" class="note-input">
+        <input type="text" class="note-input">
+      </div>
+    </div>
+  </div>
+
+  <!-- POST-CALL -->
+  <div class="postcall">
+    <h3>Post-Call — Complete Within 1 Hour</h3>
+    <div class="postcall-items">
+      <div class="postcall-item"><input type="checkbox"> Lead entered in AgencyZoom</div>
+      <div class="postcall-item"><input type="checkbox"> Correct pipeline selected</div>
+      <div class="postcall-item"><input type="checkbox"> Lead source tagged</div>
+      <div class="postcall-item"><input type="checkbox"> Quote started in PL Rater</div>
+      <div class="postcall-item"><input type="checkbox"> Follow-up task set in AZ</div>
+      <div class="postcall-item"><input type="checkbox"> James notified if hot lead</div>
+    </div>
+  </div>
+
+</div><!-- /panel-personal -->
+
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- COMMERCIAL LINES PANEL -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="panel" id="panel-commercial">
+
+  <!-- PRE-CALL -->
+  <div class="precall">
+    <div class="precall-icon">🏢</div>
+    <div>
+      <strong>Pre-Call Checklist</strong> — Complete before every commercial prospect conversation
+      <div class="precall-items">
+        <div class="precall-item">Looked up business website</div>
+        <div class="precall-item">Checked Google / LinkedIn</div>
+        <div class="precall-item">Intake form open and ready</div>
+        <div class="precall-item">AgencyZoom commercial pipeline open</div>
+        <div class="precall-item">Know their industry / NAICS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: BUSINESS INFO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div class="section-title">Business Information</div>
+      <div class="section-note">Required for all commercial lines</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Legal Business Name <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>DBA (if applicable)</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>EIN / Tax ID <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Business Address <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Business Phone</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Business Website</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Entity Type <span class="req">*</span></label>
+          <input type="text" class="field-input">
+          <div class="field-hint">LLC / Corp / Sole Prop / Partnership</div>
+        </div>
+        <div class="field">
+          <label>Year Business Founded</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>How Did They Hear About Us?</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: OWNER INFO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div class="section-title">Owner / Principal Information</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Owner Full Legal Name <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Home Address</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Owner Email</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Owner Cell Phone</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Best Contact — Owner or Office?</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: LINES NEEDED -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div class="section-title">Lines of Coverage Needed</div>
+    </div>
+    <div class="check-group">
+      <div class="checks">
+        <label class="check-item"><input type="checkbox"> General Liability</label>
+        <label class="check-item"><input type="checkbox"> Workers Compensation</label>
+        <label class="check-item"><input type="checkbox"> Commercial Auto</label>
+        <label class="check-item"><input type="checkbox"> BOP (Business Owner's Policy)</label>
+        <label class="check-item"><input type="checkbox"> Commercial Property</label>
+        <label class="check-item"><input type="checkbox"> Inland Marine / Equipment</label>
+        <label class="check-item"><input type="checkbox"> Cyber Liability</label>
+        <label class="check-item"><input type="checkbox"> Umbrella / Excess</label>
+        <label class="check-item"><input type="checkbox"> Professional Liability / E&O</label>
+        <label class="check-item"><input type="checkbox"> Directors & Officers</label>
+        <label class="check-item"><input type="checkbox"> Builders Risk</label>
+        <label class="check-item"><input type="checkbox"> Surety Bond</label>
+        <label class="check-item"><input type="checkbox"> Other: _______________</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: OPERATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div class="section-title">Business Operations</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>Description of Operations <span class="req">*</span></label>
+          <input type="text" class="field-input">
+          <div class="field-hint">What does the business actually do day-to-day?</div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Annual Gross Revenue <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Annual Payroll</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>States of Operation</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Does the business use subcontractors?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-subs"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-subs"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Do subcontractors carry their own GL and WC insurance?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-sub-ins"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-sub-ins"> No</label>
+        <label class="yn-option"><input type="radio" name="cl-sub-ins"> N/A</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Does the business work at heights, below grade, or in hazardous conditions?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-hazard"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-hazard"> No</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: EMPLOYEES & PAYROLL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <div class="section-title">Employees & Payroll</div>
+      <div class="section-note">Required for WC and GL</div>
+    </div>
+    <div class="repeat-block">
+      <table class="payroll-table">
+        <thead>
+          <tr>
+            <th>Job Classification / Role</th>
+            <th>FT or PT</th>
+            <th># of Employees</th>
+            <th>Annual Payroll</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td></tr>
+          <tr><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td></tr>
+          <tr><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td></tr>
+          <tr><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td><td><input type="text" class="tbl-input"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Does the owner want to be included or excluded from WC?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-wc-owner"> Included</label>
+        <label class="yn-option"><input type="radio" name="cl-wc-owner"> Excluded</label>
+      </div>
+    </div>
+    <div class="flag info">
+      <span class="flag-icon">ℹ️</span>
+      <span>WC payroll must be broken down by job classification — office vs. field vs. management. Blended payroll is not acceptable for submission.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 6: VEHICLES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <div class="section-title">Commercial Vehicles & Drivers</div>
+      <div class="section-note">Complete if Commercial Auto needed</div>
+    </div>
+
+    <!-- VEHICLES -->
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 1</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Primary Use</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Garaging Address</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Farthest Distance Traveled</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 2 (if applicable)</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Primary Use</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Garaging Address</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Farthest Distance Traveled</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">🚗 Vehicle 3 (if applicable)</div>
+      <div class="repeat-grid">
+        <div class="repeat-field"><label>Year / Make / Model</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>VIN</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Primary Use</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Annual Mileage</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Garaging Address</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Farthest Distance Traveled</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+
+    <!-- DRIVERS -->
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 1 <span style="font-weight:400;color:var(--red);font-size:10px;margin-left:6px;">All fields required</span></div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License # <span class="req">*</span></label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State <span class="req">*</span></label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 2 (if applicable)</div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License #</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="repeat-block">
+      <div class="repeat-header">👤 Driver 3 (if applicable)</div>
+      <div class="repeat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="repeat-field"><label>Full Legal Name</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Date of Birth</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>Driver's License #</label><input type="text" class="field-input"></div>
+        <div class="repeat-field"><label>License State</label><input type="text" class="field-input"></div>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Are any vehicles personally owned but used for business?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-pvt-veh"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-pvt-veh"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Do any vehicles haul trailers or tow equipment?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-trailer"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-trailer"> No</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: CURRENT COVERAGE & LOSSES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <div class="section-title">Current Coverage & Loss History</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Current Carrier(s) <span class="req">*</span></label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Policy Expiration Date(s)</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Current Annual Premium</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any claims or losses in the past 5 years? <span class="req">*</span></span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-losses"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-losses"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Has coverage ever been canceled or non-renewed?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-cancel"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-cancel"> No</label>
+      </div>
+    </div>
+    <div class="yn-row">
+      <span class="yn-question">Any gaps in coverage in the past 3 years?</span>
+      <div class="yn-options">
+        <label class="yn-option"><input type="radio" name="cl-gaps"> Yes</label>
+        <label class="yn-option"><input type="radio" name="cl-gaps"> No</label>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>If yes to any above — provide details</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="flag warn">
+      <span class="flag-icon">⚠️</span>
+      <span>Always pull a loss run if the prospect has had any prior claims. Do not quote without it — carriers will require it at submission and surprises kill deals.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 8: NOTES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">8</div>
+      <div class="section-title">Notes & Follow-Up</div>
+    </div>
+    <div class="fields">
+      <div class="field-row">
+        <div class="field">
+          <label>Best Time to Follow Up</label>
+          <input type="text" class="field-input">
+        </div>
+        <div class="field">
+          <label>Decision Timeline</label>
+          <input type="text" class="field-input">
+          <div class="field-hint">When do they need coverage?</div>
+        </div>
+        <div class="field">
+          <label>Lead Source (for AgencyZoom)</label>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+    </div>
+    <div class="notes-area">
+      <div class="notes-label">Additional Notes</div>
+      <div class="notes-lines">
+        <input type="text" class="note-input">
+        <input type="text" class="note-input">
+        <input type="text" class="note-input">
+      </div>
+    </div>
+  </div>
+
+  <!-- POST-CALL -->
+  <div class="postcall">
+    <h3>Post-Call — Complete Within 1 Hour</h3>
+    <div class="postcall-items">
+      <div class="postcall-item"><input type="checkbox"> Lead entered in AgencyZoom</div>
+      <div class="postcall-item"><input type="checkbox"> Commercial pipeline selected</div>
+      <div class="postcall-item"><input type="checkbox"> Lead source tagged</div>
+      <div class="postcall-item"><input type="checkbox"> All fields completed in AZ</div>
+      <div class="postcall-item"><input type="checkbox"> Follow-up task set with date</div>
+      <div class="postcall-item"><input type="checkbox"> Loss run requested if applicable</div>
+      <div class="postcall-item"><input type="checkbox"> James notified if hot lead</div>
+    </div>
+  </div>
+
+</div><!-- /panel-commercial -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>TrueSpan Group LLC · Lee's Summit, MO · truespangroup.com · <span class="req">*</span> Required fields</span>
+  <button class="print-btn screen-only" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+</div><!-- /page -->
+</div><!-- /wrapper -->
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+  document.getElementById(`panel-${tab}`).classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueSpan — Carrier Reference Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #1a3a5c;
+    --navy-light: #234d7a;
+    --teal: #0e7c7b;
+    --gold: #c9a84c;
+    --gold-light: #f0d68a;
+    --cream: #faf8f4;
+    --border: #dde3ec;
+    --text: #1e2d3d;
+    --muted: #6b7c93;
+    --white: #ffffff;
+    --personal: #1a6b5a;
+    --personal-bg: #edf7f5;
+    --commercial: #1a3a5c;
+    --commercial-bg: #edf1f7;
+    --direct: #c9a84c;
+    --direct-bg: #fdf8ec;
+    --apx: #7b4fa0;
+    --apx-bg: #f5edfb;
+    --es: #c0392b;
+    --es-bg: #fdf0ee;
+    --siaa: #2471a3;
+    --siaa-bg: #eaf4fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    padding: 36px 48px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(14,124,123,0.1);
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: white;
+    line-height: 1.2;
+  }
+
+  .header h1 span {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+
+  .gold-rule {
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), rgba(201,168,76,0.2));
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    padding: 16px 48px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: center;
+  }
+
+  .legend-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .badge.direct  { background: var(--direct-bg);  color: #7a5800; }
+  .badge.apx     { background: var(--apx-bg);     color: #5a2d80; }
+  .badge.siaa    { background: var(--siaa-bg);     color: #145a85; }
+  .badge.es      { background: var(--es-bg);       color: #8b1c14; }
+  .badge.london  { background: #f0f4ff;            color: #2c3e8b; }
+  .badge.btis    { background: #fff3e8;            color: #8b4500; }
+
+  /* ── WRAPPER ── */
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+  }
+
+  /* ── TAB BAR ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .tab-btn:hover { color: var(--navy); background: var(--cream); }
+
+  .tab-btn.active.personal {
+    background: var(--personal);
+    color: white;
+  }
+
+  .tab-btn.active.commercial {
+    background: var(--commercial);
+    color: white;
+  }
+
+  /* ── PANEL ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-hdr {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 28px 0 12px;
+  }
+
+  .section-hdr:first-child { margin-top: 0; }
+
+  .section-icon {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CARRIER GRID ── */
+  .carrier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  /* ── CARRIER CARD ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .card:hover {
+    box-shadow: 0 3px 16px rgba(26,58,92,0.08);
+    border-color: #bbc8d8;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .carrier-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .carrier-aka {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    align-items: flex-start;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    min-width: 58px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .info-val {
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .info-val a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .info-val a:hover { text-decoration: underline; }
+
+  .note-box {
+    background: #fffbf0;
+    border-left: 3px solid var(--gold);
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #6b5200;
+    border-radius: 0 5px 5px 0;
+    line-height: 1.5;
+  }
+
+  /* ── LOB PILLS ── */
+  .lob-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .lob-pill {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .tabs { display: none; }
+    .panel { display: block !important; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; }
+    .card { break-inside: avoid; }
+    body { background: white; }
+    .legend { padding: 12px 24px; }
+    .wrapper { padding: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 24px 20px 20px; }
+    .legend { padding: 12px 20px; }
+    .wrapper { padding: 16px; }
+    .carrier-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <h1>TrueSpan Group <span>Carrier Guide</span></h1>
+      <div class="header-sub">Internal Reference &nbsp;·&nbsp; Kristen Kalwei</div>
+    </div>
+    <div class="header-meta">
+      210 SW Market St Suite 145<br>
+      Lee's Summit, MO 64063<br>
+      (913) 242-0373
+    </div>
+  </div>
+</div>
+<div class="gold-rule"></div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="legend-label">Access Key:</span>
+  <span class="badge direct">⭐ Direct Appointment</span>
+  <span class="badge apx">🔵 AccessPlus (APX)</span>
+  <span class="badge siaa">🟦 SIAA / MIAA</span>
+  <span class="badge es">🔴 E&S Market</span>
+  <span class="badge london">🏛 London Underwriters</span>
+  <span class="badge btis">🟠 via BTIS</span>
+</div>
+
+<div class="wrapper">
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active personal" onclick="switchTab('personal', this)">🏠 Personal Lines</button>
+  <button class="tab-btn commercial" onclick="switchTab('commercial', this)">🏢 Commercial Lines</button>
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- PERSONAL LINES -->
+<!-- ══════════════════════════════════ -->
+<div class="panel active" id="panel-personal">
+
+  <!-- DIRECT APPOINTMENTS -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:#fdf8ec;">⭐</div>
+    <div class="section-title">Direct Appointments</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Liberty Mutual / Safeco</div>
+          <div class="carrier-aka">Formerly Safeco — now Liberty Mutual brand</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Umbrella, Dwelling Fire, Renters</span></div>
+        <div class="note-box">Primary personal lines carrier. Strong in MO and KS. PL Rater quotes Safeco directly.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Progressive</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Auto, Umbrella, RV, Boat, Motorcycle</span></div>
+        <div class="note-box">Great for non-standard auto and multi-vehicle households. Also feeds through PL Rater.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">GEICO</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in via your GEICO agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Auto (primary), Umbrella</span></div>
+        <div class="note-box">Direct-to-consumer carrier with agent affiliate access. Primarily used for auto.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Hagerty</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Classic / Collector Vehicle, Boat</span></div>
+        <div class="note-box">Specialty only — for classic cars, collector vehicles, and antique boats. Not for daily drivers.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">National General</div>
+          <div class="carrier-aka">National General 360</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your National General agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Auto, Home, Dwelling Fire, Umbrella</span></div>
+        <div class="note-box">Good option for non-standard risks and clients with prior claims. Also available through AccessPlus.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Bristol West</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your Bristol West agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Non-Standard Auto</span></div>
+        <div class="note-box">Non-standard auto specialist. Use for clients with violations, DUIs, or lapses in coverage.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Steadily</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Landlord / Rental Property / Dwelling Fire</span></div>
+        <div class="note-box">Go-to for real estate investors, landlords, and STR properties. Fast quote-to-bind process.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">American Modern</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your American Modern agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Specialty Home, Vacant, Seasonal, Manufactured Home, Boat, RV, Motorcycle</span></div>
+        <div class="note-box">Specialty and non-standard personal lines. Use for risks standard markets decline.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Homeowners of America</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your Homeowners of America agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Homeowners (MO only)</span></div>
+        <div class="note-box">Direct appointment for homeowners in Missouri only. We do not have access to their Dwelling Fire program.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Jewelers Mutual</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Jewelry / Valuable Items / Scheduled Articles</span></div>
+        <div class="note-box">Specialty only — for scheduled jewelry, watches, and high-value items. Not a standard lines carrier.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Travelers</div>
+          <div class="carrier-aka">Direct appointment coming soon</div>
+        </div>
+        <span class="badge direct">Direct (Pending)</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment in process — also available via AccessPlus in the meantime</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Umbrella, Boat, Renters</span></div>
+        <div class="note-box">Strong standard market. Use AccessPlus to quote Travelers until direct appointment activates.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIA ACCESSPLUS (APX) -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:var(--apx-bg);">🔵</div>
+    <div class="section-title">Via AccessPlus (APX) — Paid at AccessPlus Commission</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">The Hartford</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Umbrella, Renters</span></div>
+        <div class="note-box">Access via APX — commission paid by AccessPlus, not Hartford direct. Also available on commercial side.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Foremost Signature &amp; Choice</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your Foremost agent portal (foremost.com/agents)</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Dwelling Fire, Mobile Home, Specialty</span></div>
+        <div class="note-box">Direct appointment. Foremost Signature is standard; Foremost Choice is for harder-to-place risks. Both accessed through your direct Foremost portal.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Nationwide</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Umbrella, Farm, Boat, RV</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Stillwater</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Umbrella, Dwelling Fire, Renters</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Midwest Family Mutual</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Home, Auto, Farm</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Neptune Flood</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Flood Insurance (Private)</span></div>
+        <div class="note-box">Direct appointment. Private flood alternative to NFIP. Always ask personal lines clients about flood exposure — especially MO and KS river/lake properties.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Burns &amp; Wilcox</div>
+          <div class="carrier-aka">E&S Specialty — Personal &amp; Commercial</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your Burns &amp; Wilcox agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Specialty Personal Lines, High-Value Homes, E&S Personal</span></div>
+        <div class="note-box">Direct appointment. Use for high-value homes, unique risks, or personal lines accounts standard markets decline. Also our primary E&S wholesale broker for specialty commercial — see Commercial tab.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Other MIAA/APX Personal Carriers</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">All available through AccessPlusX (APX) portal</span></div>
+        <div class="lob-row">
+          <span class="lob-pill">NorthStar Mutual</span>
+          <span class="lob-pill">Integrity</span>
+          <span class="lob-pill">RPS</span>
+          <span class="lob-pill">CRC Wholesale</span>
+          <span class="lob-pill">AAA</span>
+        </div>
+        <div class="note-box">Check APX portal for full availability by state. MO and KS are your primary markets.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- E&S PERSONAL -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:var(--es-bg);">🔴</div>
+    <div class="section-title">E&S Markets — Personal Lines</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Burns &amp; Wilcox</div>
+          <div class="carrier-aka">E&S Specialty Personal Lines</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your Burns &amp; Wilcox agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">High-Value Homes, Specialty Property, Vacation/Rental, Unique Risks</span></div>
+        <div class="note-box">Direct appointment. Go here when standard personal lines markets decline or the risk is unusual — high-value homes, unique construction, prior losses, or non-standard occupancy. Also our primary E&S wholesale broker for commercial — see Commercial tab.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FARM -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:#f0f7ee;">🌾</div>
+    <div class="section-title">Farm Lines — Via AccessPlus</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Aegis Agribusiness</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Farm Package, Agribusiness</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Kansas Mutual</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Farm, Personal (KS only)</span></div>
+        <div class="note-box">Kansas only. Strong farm appetite for the KS market.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Nationwide Farm</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Farm Package, Crop</span></div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /panel-personal -->
+
+
+<!-- ══════════════════════════════════ -->
+<!-- COMMERCIAL LINES -->
+<!-- ══════════════════════════════════ -->
+<div class="panel" id="panel-commercial">
+
+  <!-- DIRECT -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:#fdf8ec;">⭐</div>
+    <div class="section-title">Direct Appointments</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">BTIS — Builders &amp; Tradesmen</div>
+          <div class="carrier-aka">Access to multiple E&S and specialty carriers</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">GL, BOP, Commercial Pkg, Inland Marine, Umbrella, WC, and more</span></div>
+        <div class="note-box">Our primary wholesale platform. Includes access to USLI, multiple E&S carriers, and specialty markets. Start here for most commercial submissions.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Liberty Mutual Commercial</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Commercial Auto, Inland Marine, General Liability, Workers Compensation</span></div>
+        <div class="note-box">Same portal as personal lines Liberty Mutual. Primarily used for commercial auto, inland marine, and WC in our book.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">CNA</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">BOP, GL, Commercial Property, Professional Liability, Workers Compensation</span></div>
+        <div class="note-box">Strong for Main Street commercial, small business BOP, and professional services. Current account: Grit Real Estate BOP.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Coterie Insurance</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">BOP, GL, Professional Liability</span></div>
+        <div class="note-box">Fast digital quoting for small commercial BOP. Great for Main Street, retail, and light service businesses. Current account: Borgman's Dairy Farm BOP.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Propeller Bonds</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val"><a href="https://truespan.propeller.insure/axelerator-public/" target="_blank">truespan.propeller.insure/axelerator-public</a></span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Surety Bonds — License & Permit, Contract, Misc.</span></div>
+        <div class="note-box">Our custom Propeller portal. Contractors can also self-serve bonds directly through this link. Share with contractor clients.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">AmTrust</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">WC, BOP, GL, Cyber, Commercial Auto</span></div>
+        <div class="note-box">Strong for small commercial WC and cyber. AmTrustCyber is a standalone cyber product — bind up to $1M online in real time.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Employers Insurance</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Workers Compensation</span></div>
+        <div class="note-box">WC specialist for small to mid-sized businesses. Good appetite for contractors and service businesses.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">LIO</div>
+          <div class="carrier-aka">Local Independent Online</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — log in at your LIO portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Commercial Lines — BOP, GL, Property</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">CrossCover</div>
+          <div class="carrier-aka">E&S Property Specialist</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — log in at your CrossCover portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S Commercial Property, Lessor's Risk, Mixed-Use</span></div>
+        <div class="note-box">Primary E&S property market. Use for older buildings, renovations, mixed-use, and risks standard markets decline on property.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">U.S. Assure</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — log in at your U.S. Assure portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Builders Risk, Inland Marine</span></div>
+        <div class="note-box">Specialty builders risk carrier. Use for new construction, renovations, and mid-project coverage.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIAA / MIAA ACCESS -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:var(--siaa-bg);">🟦</div>
+    <div class="section-title">Via SIAA / MIAA Connect &amp; MarketFinder</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Simply Business</div>
+        </div>
+        <span class="badge siaa">SIAA Connect</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Find through SIAA Connect → MarketFinder</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">BOP, GL, Professional Liability — small commercial</span></div>
+        <div class="note-box">Fast digital quoting platform for small commercial. Good for quick BOP and GL on straightforward risks. Access via SIAA Connect first, then MarketFinder.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Hiscox</div>
+        </div>
+        <span class="badge siaa">SIAA Xchange</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Access through SIAA Xchange portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Professional Liability, E&O, Cyber, BOP</span></div>
+        <div class="note-box">Strong for professional services, consultants, architects, and tech firms needing E&O or cyber coverage.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- E&S AND WHOLESALE -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:var(--es-bg);">🔴</div>
+    <div class="section-title">E&S Markets &amp; Wholesale Platforms</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">RT Specialty</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — submit via RT Specialty portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S Commercial — GL, Property, Contractors, Specialty</span></div>
+        <div class="note-box">Primary wholesale broker for complex E&S commercial risks. Use for contractors with difficult exposures, specialty property, and accounts standard markets decline.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">PathPoint</div>
+        </div>
+        <span class="badge es">E&S</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Log in at your PathPoint agent portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S GL, Property, BOP, Professional Liability</span></div>
+        <div class="note-box">Digital E&S platform — fast quoting for business risks that fall outside standard market appetite. Great first stop for E&S GL and BOP.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">BiBerk / Guard</div>
+          <div class="carrier-aka">Access via LocalEdge / Bridge Specialty</div>
+        </div>
+        <span class="badge btis">LocalEdge</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Access through LocalEdge / Bridge Specialty platform</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">WC, GL, BOP, Commercial Auto, Umbrella</span></div>
+        <div class="note-box">Guard (Berkshire Hathaway) is accessible via BiBerk through the LocalEdge/Bridge Specialty platform. Good WC appetite for small commercial.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Guard (AccessPlusX)</div>
+          <div class="carrier-aka">Also quotable directly via APX</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote directly through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">WC, GL, BOP, Commercial Auto</span></div>
+        <div class="note-box">Guard is accessible two ways — through APX or via LocalEdge/BiBerk. APX is usually faster for standard submissions.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">London Underwriters</div>
+        </div>
+        <span class="badge london">London Markets</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Submit through James — London market access via our wholesale relationships</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Complex E&S — Specialty Property, Liability, Marine, Unique Risks</span></div>
+        <div class="note-box">Last resort for complex risks. Route to James — submissions require a detailed underwriting narrative and supporting documents.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">USLI</div>
+          <div class="carrier-aka">Access via BTIS</div>
+        </div>
+        <span class="badge btis">via BTIS</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Access through your BTIS platform portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">GL, D&O, E&O, Specialty Commercial</span></div>
+        <div class="note-box">USLI is accessed via BTIS — not a direct appointment. Good for HOA coverage, D&O, and specialty GL risks.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">CRC Wholesale Group</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — submit via CRC portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S — Full Spectrum Commercial and Personal Specialty</span></div>
+        <div class="note-box">Broad wholesale access. Use when other E&S markets can't place the risk. Also has personal lines specialty capability.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">RPS (Risk Placement Services)</div>
+        </div>
+        <span class="badge direct">Direct</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Direct appointment — submit via RPS portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S — Commercial Specialty, Property, Casualty</span></div>
+        <div class="note-box">Use CRC and RPS as backup wholesale markets when RT Specialty and PathPoint can't place the risk.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIA ACCESSPLUS COMMERCIAL -->
+  <div class="section-hdr">
+    <div class="section-icon" style="background:var(--apx-bg);">🔵</div>
+    <div class="section-title">Via AccessPlus (APX) — Commercial</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="carrier-grid">
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Hartford Commercial</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">BOP, GL, WC, Commercial Auto</span></div>
+        <div class="note-box">Hartford's inside sales team can quote, bind, and service small commercial accounts on our behalf. Submit warm leads to their team — we stay agent of record.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Travelers Commercial</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">BOP, GL, WC, Commercial Auto, Umbrella</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Burns &amp; Wilcox Commercial</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">E&S Commercial — Specialty, Hard-to-Place Risks</span></div>
+        <div class="note-box">Burns &amp; Wilcox through APX is our wholesale access for specialty commercial submissions including cyber, professional liability, and unique property risks.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="carrier-name">Neptune Flood — Commercial</div>
+        </div>
+        <span class="badge apx">AccessPlus</span>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="info-label">Access</span><span class="info-val">Quote through AccessPlusX (APX) portal</span></div>
+        <div class="info-row"><span class="info-label">Lines</span><span class="info-val">Commercial Flood Insurance</span></div>
+        <div class="note-box">Private flood for commercial properties. Always ask commercial property clients about flood exposure.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /panel-commercial -->
+
+<!-- FOOTER NOTE -->
+<div style="margin-top:32px; padding:16px 20px; background:white; border:1px solid var(--border); border-radius:10px; font-size:11px; color:var(--muted); line-height:1.7;">
+  <strong style="color:var(--text);">Questions?</strong> &nbsp;Call James directly at (913) 242-0373 or email hello@truespangroup.com. When in doubt on where to place a risk — ask before quoting. &nbsp;|&nbsp; <strong style="color:var(--text);">AccessPlusX:</strong> Log in at your APX portal for the full carrier menu and state availability. &nbsp;|&nbsp; <em>This guide is for internal use only — TrueSpan Group LLC.</em>
+</div>
+
+</div><!-- /wrapper -->
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+</script>
+</body>
+</html>
